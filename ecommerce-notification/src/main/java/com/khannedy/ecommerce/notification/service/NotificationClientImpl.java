@@ -14,10 +14,11 @@ public class NotificationClientImpl implements NotificationClient {
     private static final Logger log = LoggerFactory.getLogger(NotificationClientImpl.class);
 
     private final KafkaTemplate<String, String> kafkaTemplate;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
 
-    public NotificationClientImpl(KafkaTemplate<String, String> kafkaTemplate) {
+    public NotificationClientImpl(KafkaTemplate<String, String> kafkaTemplate, ObjectMapper objectMapper) {
         this.kafkaTemplate = kafkaTemplate;
+        this.objectMapper = objectMapper;
     }
 
     @Override

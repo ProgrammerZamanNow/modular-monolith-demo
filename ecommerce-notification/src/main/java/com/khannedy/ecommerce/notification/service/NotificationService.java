@@ -16,10 +16,11 @@ public class NotificationService {
     private static final Logger log = LoggerFactory.getLogger(NotificationService.class);
 
     private final NotificationRepository notificationRepository;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
 
-    public NotificationService(NotificationRepository notificationRepository) {
+    public NotificationService(NotificationRepository notificationRepository, ObjectMapper objectMapper) {
         this.notificationRepository = notificationRepository;
+        this.objectMapper = objectMapper;
     }
 
     @KafkaListener(topics = "notification_events", groupId = "notification-group")
