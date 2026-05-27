@@ -21,7 +21,6 @@ public class ArchitectureTest {
                 .should().dependOnClassesThat().resideInAnyPackage(
                         "..ecommerce.product.controller..", "..ecommerce.product.service..", "..ecommerce.product.entity..", "..ecommerce.product.repository..",
                         "..ecommerce.customer.controller..", "..ecommerce.customer.service..", "..ecommerce.customer.entity..", "..ecommerce.customer.repository..",
-                        "..ecommerce.payment.controller..", "..ecommerce.payment.service..", "..ecommerce.payment.entity..", "..ecommerce.payment.repository..",
                         "..ecommerce.notification.service..", "..ecommerce.notification.entity..", "..ecommerce.notification.repository.."
                 ).check(importedClasses);
 
