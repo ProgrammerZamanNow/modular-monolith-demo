@@ -111,6 +111,21 @@ Saat trafik membludak dan modul `Product` harus dipisah ke server lain, bagaiman
 layout: default
 ---
 
+# Perlindungan Arsitektur & Dokumentasi
+Mencegah pelanggaran aturan (tight coupling) sebelum masuk ke *production*.
+
+- **ArchUnit (Architecture Testing)**
+  - Mengawal agar batas antar-modul tidak ditrabas oleh baris kode baru.
+  - *Build Pipeline* otomatis gagal jika Modul A meng-import kelas implementasi Modul B tanpa melalui *Client Interface*.
+  - Menjamin investasi arsitektur Modular Monolith berumur panjang (tidak membusuk kembali menjadi *Spaghetti Monolith*).
+- **Swagger OpenAPI**
+  - Aplikasi secara otomatis menyajikan dokumentasi gabungan dari seluruh modul di satu UI (`/swagger-ui.html`).
+  - Tampilan API utuh layaknya berasal dari sekumpulan Microservices sungguhan.
+
+---
+layout: default
+---
+
 # Kesimpulan
 Modular Monolith adalah batu pijakan sempurna untuk sebagian besar *startup* maupun fitur baru.
 

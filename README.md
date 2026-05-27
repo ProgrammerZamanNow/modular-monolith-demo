@@ -76,6 +76,11 @@ Saat ini, `ecommerce-order` memanggil fitur manajemen stok melalui interface mur
 - **Payment**: Penampung jejak jejak pembayaran pesanan.
 - **Notification**: Modul khusus ini dibangun dengan **Event-Driven Architecture**. Modul klien (*NotificationClient*) hanya bertanggungjawab mem-publish perintah (*Spring Application Event*) tanpa mem-blokir proses utama aplikasi yang sedang berjalan, untuk kemudian diproses oleh *listener* internal dan disimpan di database.
 
+## Tooling & Validasi Arsitektur
+
+- **ArchUnit**: Menjadi garda terdepan pelindung arsitektur. *Unit test* (`ArchitectureTest.java`) akan memvalidasi *tight coupling*. Jika ada pengembang yang mencoba mem-bypass *Client interface* dan meng-import kelas implementasi dari modul lain secara langsung, maka proses *build* akan gagal (*Build Failure*).
+- **Swagger / OpenAPI**: Semua *endpoint* dari seluruh modul otomatis tergabung dan terdokumentasi di antarmuka Swagger UI (`http://localhost:8080/swagger-ui.html`). Antarmuka ini merepresentasikan kumpulan API secara utuh layaknya *Microservices gateway*.
+
 ## Cara Menjalankan
 
 Aplikasi ini dilindungi dan dijamin kelayakannya oleh jaring *Integration Testing* (*End-to-End* REST API) menggunakan *Spring Boot Web Test*.
