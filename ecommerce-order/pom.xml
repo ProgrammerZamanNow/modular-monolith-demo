@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.khannedy</groupId>
+        <artifactId>modular-monolith-demo</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>ecommerce-order</artifactId>
+    <name>ecommerce-order</name>
+    <description>Order module</description>
+    <dependencies>
+        <dependency>
+            <groupId>com.khannedy</groupId>
+            <artifactId>ecommerce-product-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.khannedy</groupId>
+            <artifactId>ecommerce-payment-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.khannedy</groupId>
+            <artifactId>ecommerce-notification-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.khannedy</groupId>
+            <artifactId>ecommerce-customer-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
