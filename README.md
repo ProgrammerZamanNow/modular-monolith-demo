@@ -13,7 +13,7 @@ Proyek ini dipisahkan berdasarkan domain bisnis ke dalam beberapa modul Maven. U
 ```mermaid
 flowchart TD
     %% Define Aggregator
-    APP[ecommerce-app (Aggregator)]
+    APP["ecommerce-app (Aggregator)"]
 
     %% Define Implementation Modules
     subgraph Implementations ["Modul Implementasi (Logic & DB)"]
