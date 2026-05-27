@@ -88,6 +88,7 @@ Proyek ini dilengkapi dengan beberapa *branch* yang sudah disiapkan untuk mendem
 - `main`: Arsitektur *Modular Monolith* yang stabil, bersih, dan lulus semua validasi.
 - `demo/architecture-test`: Mensimulasikan kesalahan (*bad practice*) di mana *developer* mencoba menembus batas modul (misal: modul `Order` memanggil `ProductService` secara langsung, bukan `ProductClient`). *Branch* ini membuktikan bagaimana **ArchUnit** akan langsung menggagalkan proses *build*. (Lihat [PR #1](https://github.com/ProgrammerZamanNow/modular-monolith-demo/pull/1))
 - `demo/split-module-as-microservices`: Mendemonstrasikan betapa mudahnya memecah monolith menjadi microservices. Pada *branch* ini, implementasi modul `ecommerce-payment` **dihapus seutuhnya** dan direpresentasikan menggunakan antarmuka *HTTP RestClient*. Hasilnya: **Nol Perubahan** pada modul pemanggil (`Order`). (Lihat [PR #2](https://github.com/ProgrammerZamanNow/modular-monolith-demo/pull/2))
+- `demo/event-driven-architecture`: Mensimulasikan migrasi dari arsitektur *event-driven* internal aplikasi (Spring Application Event) menjadi menggunakan Message Broker eksternal (Apache Kafka) pada modul `Notification`. Sama seperti sebelumnya, hasil akhirnya adalah **Nol Perubahan** pada modul pemanggil. (Lihat [PR #3](https://github.com/ProgrammerZamanNow/modular-monolith-demo/pull/3))
 
 ## Cara Menjalankan
 
