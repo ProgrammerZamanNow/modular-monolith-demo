@@ -6,6 +6,7 @@ import com.khannedy.ecommerce.order.entity.Order;
 import com.khannedy.ecommerce.order.model.OrderItemRequest;
 import com.khannedy.ecommerce.order.model.OrderRequest;
 import com.khannedy.ecommerce.order.model.OrderResponse;
+import com.khannedy.ecommerce.notification.client.NotificationClient;
 import com.khannedy.ecommerce.order.repository.OrderItemRepository;
 import com.khannedy.ecommerce.order.repository.OrderRepository;
 import com.khannedy.ecommerce.payment.repository.PaymentRepository;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.client.RestTestClient;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -54,6 +56,9 @@ class OrderControllerIT {
 
     @Autowired
     private PaymentRepository paymentRepository;
+
+    @MockitoBean
+    private NotificationClient notificationClient;
 
     private RestTestClient restTestClient;
 
