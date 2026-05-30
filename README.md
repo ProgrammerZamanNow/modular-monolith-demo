@@ -81,6 +81,15 @@ Saat ini, `ecommerce-order` memanggil fitur manajemen stok melalui interface mur
 - **ArchUnit**: Menjadi garda terdepan pelindung arsitektur. *Unit test* (`ArchitectureTest.java`) akan memvalidasi *tight coupling*. Jika ada pengembang yang mencoba mem-bypass *Client interface* dan meng-import kelas implementasi dari modul lain secara langsung, maka proses *build* akan gagal (*Build Failure*).
 - **Swagger / OpenAPI**: Semua *endpoint* dari seluruh modul otomatis tergabung dan terdokumentasi di antarmuka Swagger UI (`http://localhost:8080/swagger-ui.html`). Antarmuka ini merepresentasikan kumpulan API secara utuh layaknya *Microservices gateway*.
 
+## Skenario Demo (Branches)
+
+Proyek ini dilengkapi dengan beberapa *branch* yang sudah disiapkan untuk mendemonstrasikan kapabilitas Modular Monolith:
+
+- `main`: Arsitektur *Modular Monolith* yang stabil, bersih, dan lulus semua validasi.
+- `demo/architecture-test`: Mensimulasikan kesalahan (*bad practice*) di mana *developer* mencoba menembus batas modul (misal: modul `Order` memanggil `ProductService` secara langsung, bukan `ProductClient`). *Branch* ini membuktikan bagaimana **ArchUnit** akan langsung menggagalkan proses *build*. (Lihat [PR #1](https://github.com/ProgrammerZamanNow/modular-monolith-demo/pull/1))
+- `demo/split-module-as-microservices`: Mendemonstrasikan betapa mudahnya memecah monolith menjadi microservices. Pada *branch* ini, implementasi modul `ecommerce-payment` **dihapus seutuhnya** dan direpresentasikan menggunakan antarmuka *HTTP RestClient*. Hasilnya: **Nol Perubahan** pada modul pemanggil (`Order`). (Lihat [PR #2](https://github.com/ProgrammerZamanNow/modular-monolith-demo/pull/2))
+- `demo/event-driven-architecture`: Mensimulasikan migrasi dari arsitektur *event-driven* internal aplikasi (Spring Application Event) menjadi menggunakan Message Broker eksternal (Apache Kafka) pada modul `Notification`. Sama seperti sebelumnya, hasil akhirnya adalah **Nol Perubahan** pada modul pemanggil. (Lihat [PR #3](https://github.com/ProgrammerZamanNow/modular-monolith-demo/pull/3))
+
 ## Cara Menjalankan
 
 Aplikasi ini dilindungi dan dijamin kelayakannya oleh jaring *Integration Testing* (*End-to-End* REST API) menggunakan *Spring Boot Web Test*.
