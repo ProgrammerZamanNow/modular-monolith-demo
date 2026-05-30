@@ -21,6 +21,11 @@
         </dependency>
         <dependency>
             <groupId>com.khannedy</groupId>
+            <artifactId>ecommerce-product</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.khannedy</groupId>
             <artifactId>ecommerce-payment-client</artifactId>
             <version>${project.version}</version>
         </dependency>

@@ -14,8 +14,8 @@ import com.khannedy.ecommerce.order.repository.OrderRepository;
 import com.khannedy.ecommerce.payment.client.PaymentClient;
 import com.khannedy.ecommerce.payment.client.PaymentClientRequest;
 import com.khannedy.ecommerce.payment.client.PaymentClientResponse;
-import com.khannedy.ecommerce.product.client.ProductClient;
-import com.khannedy.ecommerce.product.client.ProductClientResponse;
+import com.khannedy.ecommerce.product.model.ProductResponse;
+import com.khannedy.ecommerce.product.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -34,13 +34,13 @@ public class OrderService {
     private static final Logger log = LoggerFactory.getLogger(OrderService.class);
 
     private final OrderRepository orderRepository;
-    private final ProductClient productClient;
+    private final ProductService productClient;
     private final PaymentClient paymentClient;
     private final NotificationClient notificationClient;
     private final CustomerClient customerClient;
 
     public OrderService(OrderRepository orderRepository,
-                        ProductClient productClient,
+                        ProductService productClient,
                         PaymentClient paymentClient,
                         NotificationClient notificationClient,
                         CustomerClient customerClient) {
@@ -65,8 +65,7 @@ public class OrderService {
 
         for (OrderItemRequest itemRequest : request.items()) {
             // 1. Fetch Product Data from ProductClient
-            ProductClientResponse product = productClient.getProduct(itemRequest.productId())
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found: " + itemRequest.productId()));
+            ProductResponse product = productClient.getById(itemRequest.productId());
 
             if (product.stock() < itemRequest.quantity()) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient stock for product: " + product.name());
