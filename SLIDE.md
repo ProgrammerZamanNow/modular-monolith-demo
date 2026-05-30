@@ -135,6 +135,8 @@ Praktek langsung dari keunggulan Modular Monolith.
   Mensimulasikan pelanggaran (*tight coupling*). Modul `Order` memanggil implementasi modul `Product`. *Build* otomatis gagal digagalkan oleh *ArchUnit*.
 - **`demo/split-module-as-microservices` (PR #2)**
   Mensimulasikan evolusi menjadi *Microservices*. Modul `Payment` **dihapus**, diubah menjadi pemanggilan `RestClient` via HTTP. Hebatnya, **tidak ada perubahan satupun di modul konsumen (`OrderService`)**!
+- **`demo/event-driven-architecture` (PR #3)**
+  Mensimulasikan migrasi dari arsitektur *event-driven* internal aplikasi (Spring Application Event) menjadi menggunakan Message Broker eksternal (Apache Kafka) pada modul `Notification`. Sekali lagi, **tidak ada perubahan satupun di modul konsumen (`OrderService`)**!
 
 ---
 layout: default
