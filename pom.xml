@@ -26,7 +26,6 @@
         <module>ecommerce-product-client</module>
         <module>ecommerce-order</module>
         <module>ecommerce-order-client</module>
-        <module>ecommerce-payment</module>
         <module>ecommerce-payment-client</module>
         <module>ecommerce-notification</module>
         <module>ecommerce-notification-client</module>

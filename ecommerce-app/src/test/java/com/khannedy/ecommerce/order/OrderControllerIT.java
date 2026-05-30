@@ -8,7 +8,12 @@ import com.khannedy.ecommerce.order.model.OrderRequest;
 import com.khannedy.ecommerce.order.model.OrderResponse;
 import com.khannedy.ecommerce.order.repository.OrderItemRepository;
 import com.khannedy.ecommerce.order.repository.OrderRepository;
-import com.khannedy.ecommerce.payment.repository.PaymentRepository;
+import com.khannedy.ecommerce.payment.client.PaymentClient;
+import com.khannedy.ecommerce.payment.client.PaymentClientRequest;
+import com.khannedy.ecommerce.payment.client.PaymentClientResponse;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.mockito.Mockito;
+import static org.mockito.ArgumentMatchers.any;
 import com.khannedy.ecommerce.product.entity.Brand;
 import com.khannedy.ecommerce.product.entity.Category;
 import com.khannedy.ecommerce.product.entity.Product;
@@ -52,8 +57,8 @@ class OrderControllerIT {
     @Autowired
     private CustomerRepository customerRepository;
 
-    @Autowired
-    private PaymentRepository paymentRepository;
+    @MockitoBean
+    private PaymentClient paymentClient;
 
     private RestTestClient restTestClient;
 
@@ -65,7 +70,7 @@ class OrderControllerIT {
         orderItemRepository.deleteAll();
         orderRepository.deleteAll();
         customerRepository.deleteAll();
-        paymentRepository.deleteAll();
+
         productRepository.deleteAll();
         brandRepository.deleteAll();
         categoryRepository.deleteAll();
@@ -103,6 +108,9 @@ class OrderControllerIT {
                 savedCustomer.getId(),
                 List.of(new OrderItemRequest(savedProduct.getId(), 2))
         );
+
+        Mockito.when(paymentClient.createPayment(any(PaymentClientRequest.class)))
+                .thenReturn(new PaymentClientResponse("dummy-payment-id", "PAID"));
 
         restTestClient.post()
                 .uri("/api/v1/orders")
@@ -171,6 +179,9 @@ class OrderControllerIT {
                 List.of(new OrderItemRequest(savedProduct.getId(), 1))
         );
 
+        Mockito.when(paymentClient.createPayment(any(PaymentClientRequest.class)))
+                .thenReturn(new PaymentClientResponse("dummy-payment-id", "PAID"));
+
         OrderResponse createdResponse = restTestClient.post()
                 .uri("/api/v1/orders")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -209,6 +220,9 @@ class OrderControllerIT {
                 List.of(new OrderItemRequest(savedProduct.getId(), 2))
         );
 
+        Mockito.when(paymentClient.createPayment(any(PaymentClientRequest.class)))
+                .thenReturn(new PaymentClientResponse("dummy-payment-id", "PAID"));
+
         OrderResponse createdResponse = restTestClient.post()
                 .uri("/api/v1/orders")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -238,8 +252,6 @@ class OrderControllerIT {
         assertThat(productAfterCancel.getStock()).isEqualTo(10);
 
         // Verify payment canceled
-        Order canceledOrder = orderRepository.findById(createdResponse.id()).orElseThrow();
-        com.khannedy.ecommerce.payment.entity.Payment payment = paymentRepository.findById(canceledOrder.getPaymentId()).orElseThrow();
-        assertThat(payment.getStatus()).isEqualTo("CANCELED");
+        Mockito.verify(paymentClient).cancelPayment("dummy-payment-id");
     }
 }

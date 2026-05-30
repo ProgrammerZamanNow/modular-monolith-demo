@@ -32,11 +32,6 @@
         </dependency>
         <dependency>
             <groupId>com.khannedy</groupId>
-            <artifactId>ecommerce-payment</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.khannedy</groupId>
             <artifactId>ecommerce-notification</artifactId>
             <version>${project.version}</version>
         </dependency>
